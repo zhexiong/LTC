@@ -1,16 +1,33 @@
+"""
+Time: product of choices for each digits, n1 * n2 * n3 ...
+Space: 
+"""
+
 class Solution:
+    dl_map = {"1":"1", "2":"abc", "3":"def", "4":"ghi", "5":"jkl", "6":"mno", "7":"pqrs", "8":"tuv", "9":"wxyz", "0":""}
+
     # @return a list of strings, [s1, s2]
     def letterCombinations(self, digits):
-        dl_map = {"1":["1"], "2":["a", "b", "c"], "3":["d", "e", "f"], "4":["g", "h", "i"], "5":["j", "k", "l"], "6":["m", "n", "o"], "7":["p", "q", "r", "s"], "8":["t", "u", "v"], "9":["w", "x", "y", "z"], "0":[" "]}
         combs = []
-        self.__letterCombinations(digits, 0, [], combs, dl_map)
+        def helper(digits, index, comb, combs):
+            if index == len(digits):
+                combs.append(comb)
+                return
+            for ch in self.dl_map[digits[index]]:
+                helper(digits, index + 1, comb + ch, combs)
+        helper(digits, 0, '', combs)
         return combs
-        
-    def __letterCombinations(self, digits, index, comb, combs, dl_map):
-        if index == len(digits):
-            combs.append("".join(comb))
-            return
-        for letter in dl_map[digits[index]]:
-            comb.append(letter)
-            self.__letterCombinations(digits, index + 1, comb, combs, dl_map)
-            comb.pop()
+
+class Solution2:
+    dl_map = {"1":"1", "2":"abc", "3":"def", "4":"ghi", "5":"jkl", "6":"mno", "7":"pqrs", "8":"tuv", "9":"wxyz", "0":""}
+
+    # @return a list of strings, [s1, s2]
+    def letterCombinations(self, digits):
+        combs = [""]
+        for num in digits:
+            combs = [x + y for x in combs for y in self.dl_map[num]]
+        return combs
+
+if __name__ == '__main__':
+    s = Solution()
+    print s.letterCombinations('23')
