@@ -6,6 +6,7 @@ class Solution:
         end = len(A) - 1
         while i <= end:
             if A[i] == 0:
+                # num berfor i should always be in right order.
                 A[start], A[i] = A[i], A[start]
                 start += 1
                 # make sure i never be smaller then start.

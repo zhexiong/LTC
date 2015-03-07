@@ -6,7 +6,7 @@ class Solution:
             return max_int
         if dividend == 0:
             return 0
-        sign = -1 if dividend > 0 and divisor < 0 or dividend < 0 and divisor > 0 else 1
+        sign = -1 if (dividend > 0) ^ (divisor > 0) else 1
         dividend = abs(dividend)
         divisor = abs(divisor)
         result = 0
